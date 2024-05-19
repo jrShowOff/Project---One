@@ -2,6 +2,7 @@ package Utilities;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -23,8 +24,8 @@ public class ExtentListenerClass implements ITestListener{
 	public void configureReport()
 	{
 		ReadConfig readConfig = new ReadConfig();
-		String timestamp = new SimpleDateFormat("yyyy.mm.dd.hh.mm.ss").format(new Date());
-		String reportName = "OneTestReport-" + timestamp + ".html";
+		String timestamp = new SimpleDateFormat("dd-MM-yyyy"+ " " + "hh.mm.ss").format(new Date());
+		String reportName = "OneTestReport - " + timestamp + ".html";
 		htmlReporter = new ExtentSparkReporter(System.getProperty("user.dir") + "//Reports//" + reportName);
 		reports = new ExtentReports();	
 		reports.attachReporter(htmlReporter);
@@ -66,7 +67,7 @@ public class ExtentListenerClass implements ITestListener{
 	{		
 		System.out.println("Name of test method failed:" + Result.getName() );  		
 		test = reports.createTest(Result.getName());//create entry in html report
-		test.log(Status.FAIL, MarkupHelper.createLabel("Name of the failed test case is: " + Result.getName() ,ExtentColor.RED));
+		test.log(Status.FAIL, MarkupHelper.createLabel("Name of the failed test case is: " + Result.getName(),ExtentColor.RED));
 	
 	String screenShotPath = System.getProperty("user.dir") + "//Screenshots//" + Result.getName() + ".png";
 	
@@ -74,7 +75,7 @@ public class ExtentListenerClass implements ITestListener{
 	
 	if(screenShotFile.exists())
 	{
-		test.fail("Captured Screenshot is below:" + test.addScreenCaptureFromPath(screenShotPath));
+		test.addScreenCaptureFromPath(screenShotPath);
 		
 	}
 	

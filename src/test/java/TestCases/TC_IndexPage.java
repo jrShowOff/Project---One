@@ -8,7 +8,7 @@ import PageObject.registrationPage;
 
 public class TC_IndexPage extends BaseClass{
 	@Test
-	public void verifyLogin() {
+	public static void verifyLogin() {
 		indexPage index = new indexPage(driver);
 		index.email("xx@yy.com");
 		index.clicktoenter();
@@ -45,7 +45,7 @@ public class TC_IndexPage extends BaseClass{
 			logger.info("Error message is displayed correctly");
 		}
 		else {
-			Assert.assertTrue(true);
+			Assert.assertTrue(false);
 			logger.info("Error message is not displayed correctly");
 			captureScreenShot(driver, "VerifyRegistration");
 		}
